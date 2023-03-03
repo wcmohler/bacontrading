@@ -1,16 +1,5 @@
-input price = FundamentalType.CLOSE;
-input aggregationPeriod = AggregationPeriod.DAY;
-input length = 20;
-input displace = 0;
-input showOnlyLastPeriod = no;
+# This script will display the previous day's EMA
+# on charts that use any timeframe.
+#
+# The number of periods defaults to 20.
 
-plot DailyEMA;
-
-if showOnlyLastPeriod and !IsNaN(close(period = aggregationPeriod)[-1]) {
-    DailyEMA = Double.NaN;
-} else {
-    DailyEMA = ExpAverage(fundamental(price, period = aggregationPeriod)[-displace], length);
-}
-
-DailyEMA.SetDefaultColor(GetColor(1));
-DailyEMA.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
